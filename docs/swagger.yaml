@@ -1,0 +1,102 @@
+basePath: /
+definitions:
+  resource.InputUser:
+    properties:
+      customer_name:
+        type: string
+      items:
+        items:
+          $ref: '#/definitions/resource.InputUserItem'
+        type: array
+      order_id:
+        type: integer
+      ordered_at:
+        type: string
+    type: object
+  resource.InputUserItem:
+    properties:
+      description:
+        type: string
+      item_code:
+        type: string
+      item_id:
+        type: integer
+      quantity:
+        type: integer
+    type: object
+host: localhost:1337
+info:
+  contact:
+    email: hu@go.com
+    name: Hugos
+  description: Sample API Spec for Users
+  termsOfService: https://9gag.com
+  title: Users API
+  version: v1.0
+paths:
+  /User:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Get User list
+      tags:
+      - User
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: body data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/resource.InputUser'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Add new User
+      tags:
+      - User
+  /User/{order_id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: User ID
+        in: path
+        name: order_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Delete User by ID
+      tags:
+      - User
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: User ID
+        in: path
+        name: order_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Get User by ID
+      tags:
+      - User
+swagger: "2.0"
